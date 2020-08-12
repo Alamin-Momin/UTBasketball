@@ -1,0 +1,429 @@
+<html>
+    <head>
+        <script type = "text/javascript" src = "https://d3js.org/d3.v4.min.js"></script>
+        <style>
+        </style>
+        <!--Colors:
+            green - rgb(0, 204, 102)           1-70       1-2     .56 - .60
+            light green - rgb(164,255,161)     71-140     3-4     .52 - .56 
+            beige - rgb(255,255,204)           141-210    5-6     .48 - .52
+            light red -  rgb(255, 158, 158)    211-280    7-8     .44 - .48
+            red - rgb(236,70,70)               281-353    9-10    .40 - .44
+        -->
+    </head>
+    <body>
+        <div id="svgcontainer">
+            <svg viewBox="0 0 1400 1400" xmlns="http://www.w3.org/2000/svg">
+                <!-- drawing the 3x3 square -->
+                <path d="M 100 100
+                         L 100 700
+                         L 700 700
+                         L 700 100
+                         z"
+                         stroke="black" stroke-width="1" stroke-linejoin="miter" fill="white"/>
+
+                <line x1="100" y1="300" x2="700" y2="300" stroke="black" stroke-width="1" />
+                <line x1="100" y1="500" x2="700" y2="500" stroke="black" stroke-width="1" />
+                <line x1="300" y1="100" x2="300" y2="700" stroke="black" stroke-width="1" />
+                <line x1="500" y1="100" x2="500" y2="700" stroke="black" stroke-width="1" />
+                
+                <!-- Z1 through Z9 individual squares -->
+                <!-- long early -->
+                <rect id="Z1" stroke="gray" stroke-width="1" />
+                <text x="200" y="175" text-anchor = "middle" font-size = "24px" text-shadow = "-1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF">4</text>
+                <text x="200" y="225" text-anchor = "middle" font-size = "24px" >59.4%</text>
+                <!-- long middle-->
+                <rect id="Z2" stroke="gray" stroke-width="1" />
+                <!-- long late-->
+                <rect id="Z3" stroke="gray" stroke-width="1" />
+
+                <!-- mid early -->
+                <rect id="Z4" stroke="gray" stroke-width="1" />
+                <!-- mid middle -->
+                <rect id="Z5" stroke="gray" stroke-width="1" />
+                <!-- mid late -->
+                <rect id="Z6" stroke="gray" stroke-width="1" />
+
+                <!-- short early -->
+                <rect id="Z7" stroke="gray" stroke-width="1" />
+                <!-- short middle -->
+                <rect id="Z8" stroke="gray" stroke-width="1" />
+                <!-- short late -->
+                <rect id="Z9" stroke="gray" stroke-width="1" />
+
+            </svg>
+        </div>
+    </body>
+
+    <script>
+        
+        // function to find size of rectangle
+        function size(value) {
+            if (value > .15) {
+                return 160;
+            }
+            else if (value > .07) {
+                return 100; 
+            }
+            else if (value > .05) {
+                return 40;
+            }
+            else {
+                return 10;
+            }
+        }
+
+
+        // function to find xy coordinates to begin drawing rectangle
+        function XYcoordinates(id, size) {
+            if (id == "Z1") {
+                if (size == 160) {
+                    return [120, 120];
+                }
+                else if (size == 100) {
+                    return [150, 150];
+                }
+                else if (size == 40) {
+                    return [180, 180];
+                }
+                else if (size == 10) {
+                    return [195, 195];
+                }
+            }
+            if (id == "Z2") {
+                if (size == 160) {
+                    return [320, 120];
+                }
+                else if (size == 100) {
+                    return [350, 150];
+                }
+                else if (size == 40) {
+                    return [380, 180];
+                }
+                else if (size == 10) {
+                    return [395, 195];
+                }
+            }
+            if (id == "Z3") {
+                if (size == 160) {
+                    return [520, 120];
+                }
+                else if (size == 100) {
+                    return [550, 150];
+                }
+                else if (size == 40) {
+                    return [580, 180];
+                }
+                else if (size == 10) {
+                    return [595, 195];
+                }
+            }
+            if (id == "Z4") {
+                if (size == 160) {
+                    return [120, 320];
+                }
+                else if (size == 100) {
+                    return [150, 350];
+                }
+                else if (size == 40) {
+                    return [180, 380];
+                }
+                else if (size == 10) {
+                    return [195, 395];
+                }
+            }
+            if (id == "Z5") {
+                if (size == 160) {
+                    return [320, 320];
+                }
+                else if (size == 100) {
+                    return [350, 350];
+                }
+                else if (size == 40) {
+                    return [380, 380];
+                }
+                else if (size == 10) {
+                    return [395, 395];
+                }
+            }
+            if (id == "Z6") {
+                if (size == 160) {
+                    return [520, 320];
+                }
+                else if (size == 100) {
+                    return [550, 350];
+                }
+                else if (size == 40) {
+                    return [580, 380];
+                }
+                else if (size == 10) {
+                    return [595, 395];
+                }
+            }
+            if (id == "Z7") {
+                if (size == 160) {
+                    return [120, 520];
+                }
+                else if (size == 100) {
+                    return [150, 550];
+                }
+                else if (size == 40) {
+                    return [180, 580];
+                }
+                else if (size == 10) {
+                    return [195, 595];
+                }
+            }
+            if (id == "Z8") {
+                if (size == 160) {
+                    return [320, 520];
+                }
+                else if (size == 100) {
+                    return [350, 550];
+                }
+                else if (size == 40) {
+                    return [380, 580];
+                }
+                else if (size == 10) {
+                    return [395, 595];
+                }
+            }
+            if (id == "Z9") {
+                if (size == 160) {
+                    return [520, 520];
+                }
+                else if (size == 100) {
+                    return [550, 550];
+                }
+                else if (size == 40) {
+                    return [580, 580];
+                }
+                else if (size == 10) {
+                    return [595, 595];
+                }
+            }
+        }
+
+        function RectFill(value) {
+            if (value == NaN) {
+                return "rgb(236,70,70)";
+            }
+            else if (value < .44) {
+                return "rgb(236,70,70)";
+            }
+            else if (value < .48) {
+                return "rgb(255, 158, 158)";
+            }
+            else if (value < .52) {
+                return "rgb(255,255,204)";
+            }
+            else if (value < .56) {
+                return "rgb(164,255,161)";
+            }
+            else {
+                return "rgb(0, 204, 102) ";
+            }
+        }
+
+        // define shot variables
+        var total_att = 308
+        
+        var z1_att = 48
+        var z1_makes = 19
+
+        var z2_att = 61
+        var z2_makes = 28
+
+        var z3_att = 50
+        var z3_makes = 15
+
+        var z4_att = 15
+        var z4_makes = 6
+
+        var z5_att = 36
+        var z5_makes = 12
+
+        var z6_att = 17
+        var z6_makes = 2
+
+        var z7_att = 35
+        var z7_makes = 23
+
+        var z8_att = 35
+        var z8_makes = 18
+
+        var z9_att = 11
+        var z9_makes = 5
+        
+        // setting rectangle size for Z1
+        var Z1 = document.getElementById("Z1")
+        rect_size = size(z1_att/ total_att)
+        Z1.setAttribute("width", rect_size)
+        Z1.setAttribute("height", rect_size)
+
+        // setting xy coordinates for Z1
+        var xy = XYcoordinates(Z1.id, rect_size)
+        x = xy[0]
+        y = xy[1]
+        Z1.setAttribute("x", x)
+        Z1.setAttribute("y", y)
+
+        // setting fill for Z1
+        var fill = RectFill((z1_makes * 1.5) / z1_att)
+        Z1.setAttribute("fill", fill)
+
+        
+        
+        // setting rectangle size for Z2
+        var Z2 = document.getElementById("Z2")
+        rect_size = size(z2_att / total_att)
+        Z2.setAttribute("width", rect_size)
+        Z2.setAttribute("height", rect_size)
+
+        // setting xy coordinates for Z2
+        var xy = XYcoordinates(Z2.id, rect_size)
+        x = xy[0]
+        y = xy[1]
+        Z2.setAttribute("x", x)
+        Z2.setAttribute("y", y)
+
+        // setting fill for Z2
+        var fill = RectFill((z2_makes * 1.5) / z2_att)
+        Z2.setAttribute("fill", fill)
+
+
+
+        // setting rectangle size for Z3
+        var Z3 = document.getElementById("Z3")
+        rect_size = size(z3_att / total_att)
+        Z3.setAttribute("width", rect_size)
+        Z3.setAttribute("height", rect_size)
+
+        // setting xy coordinates for Z3
+        var xy = XYcoordinates(Z3.id, rect_size)
+        x = xy[0]
+        y = xy[1]
+        Z3.setAttribute("x", x)
+        Z3.setAttribute("y", y)
+
+        // setting fill for Z3
+        var fill = RectFill((z3_makes * 1.5) / z3_att)
+        Z3.setAttribute("fill", fill)
+
+
+
+        // setting rectangle size for Z4
+        var Z4 = document.getElementById("Z4")
+        rect_size = size(z4_att / total_att)
+        Z4.setAttribute("width", rect_size)
+        Z4.setAttribute("height", rect_size)
+
+        // setting xy coordinates for Z4
+        var xy = XYcoordinates(Z4.id, rect_size)
+        x = xy[0]
+        y = xy[1]
+        Z4.setAttribute("x", x)
+        Z4.setAttribute("y", y)
+
+        // setting fill for Z4
+        var fill = RectFill(z4_makes / z4_att)
+        Z4.setAttribute("fill", fill)
+
+
+
+        // setting rectangle size for Z5
+        var Z5 = document.getElementById("Z5")
+        rect_size = size(z5_att / total_att)
+        Z5.setAttribute("width", rect_size)
+        Z5.setAttribute("height", rect_size)
+
+        // setting xy coordinates for Z5
+        var xy = XYcoordinates(Z5.id, rect_size)
+        x = xy[0]
+        y = xy[1]
+        Z5.setAttribute("x", x)
+        Z5.setAttribute("y", y)
+
+        // setting fill for Z5
+        var fill = RectFill(z5_makes / z5_att)
+        Z5.setAttribute("fill", fill)
+
+
+
+        // setting rectangle size for Z6
+        var Z6 = document.getElementById("Z6")
+        rect_size = size(z6_att / total_att)
+        Z6.setAttribute("width", rect_size)
+        Z6.setAttribute("height", rect_size)
+
+        // setting xy coordinates for Z6
+        var xy = XYcoordinates(Z6.id, rect_size)
+        x = xy[0]
+        y = xy[1]
+        Z6.setAttribute("x", x)
+        Z6.setAttribute("y", y)
+
+        // setting fill for Z6
+        var fill = RectFill(z6_makes / z6_att)
+        Z6.setAttribute("fill", fill)
+
+
+
+        // setting rectangle size for Z7
+        var Z7 = document.getElementById("Z7")
+        rect_size = size(z7_att / total_att)
+        Z7.setAttribute("width", rect_size)
+        Z7.setAttribute("height", rect_size)
+
+        // setting xy coordinates for Z7
+        var xy = XYcoordinates(Z7.id, rect_size)
+        x = xy[0]
+        y = xy[1]
+        Z7.setAttribute("x", x)
+        Z7.setAttribute("y", y)
+
+        // setting fill for Z7
+        var fill = RectFill(z7_makes / z7_att)
+        Z7.setAttribute("fill", fill)
+
+
+
+        // setting rectangle size for Z8
+        var Z8 = document.getElementById("Z8")
+        rect_size = size(z8_att / total_att)
+        Z8.setAttribute("width", rect_size)
+        Z8.setAttribute("height", rect_size)
+
+        // setting xy coordinates for Z8
+        var xy = XYcoordinates(Z8.id, rect_size)
+        x = xy[0]
+        y = xy[1]
+        Z8.setAttribute("x", x)
+        Z8.setAttribute("y", y)
+
+        // setting fill for Z8
+        var fill = RectFill(z8_makes / z8_att)
+        Z8.setAttribute("fill", fill)
+
+
+
+        // setting rectangle size for Z9
+        var Z9 = document.getElementById("Z9")
+        rect_size = size(z9_att / total_att)
+        Z9.setAttribute("width", rect_size)
+        Z9.setAttribute("height", rect_size)
+
+        // setting xy coordinates for Z9
+        var xy = XYcoordinates(Z9.id, rect_size)
+        x = xy[0]
+        y = xy[1]
+        Z9.setAttribute("x", x)
+        Z9.setAttribute("y", y)
+
+        // setting fill for Z9
+        var fill = RectFill(z9_makes / z9_att)
+        Z9.setAttribute("fill", fill)
+
+    </script>
+
+</html>

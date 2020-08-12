@@ -1,0 +1,445 @@
+<html>
+    <head>
+        <script type = "text/javascript" src = "https://d3js.org/d3.v4.min.js"></script>
+        <style>
+        </style>
+        <!--Colors:
+            green - rgb(0, 204, 102)           1-70       1-2     .40 - .44
+            light green - rgb(164,255,161)     71-140     3-4     .44 - .48 
+            beige - rgb(255,255,204)           141-210    5-6     .48 - .52
+            light red -  rgb(255, 158, 158)    211-280    7-8     .52 - .56
+            red - rgb(236,70,70)               281-353    9-10    .56 - .60
+        -->
+    </head>
+    <body>
+        <div id="svgcontainer">
+            <svg viewBox="0 0 1400 1400" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+
+                    <!-- Gradient x-axis-->
+                    <!-- .55 - .60 -->
+                    <linearGradient id="e" x1="910" y1="710" x2="1110" y2="710" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="rgb(0, 204, 102)" offset="0" />
+                        <stop stop-color="rgb(0, 204, 102) " offset="1"/>
+                    </linearGradient>
+                    <!-- .50 - .55 -->
+                    <linearGradient id="f" x1="710" y1="710" x2="910" y2="710" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="rgb(164,255,161)" offset="0" />
+                        <stop stop-color="rgb(164,255,161)" offset="1"/>
+                    </linearGradient>
+                    <!-- .45 - .50 -->
+                    <linearGradient id="g" x1="510" y1="710" x2="710" y2="710" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="rgb(255,255,204)" offset="0" />
+                        <stop stop-color="rgb(255,255,204)" offset="1"/>
+                    </linearGradient>
+                    <!-- .40 - .45-->
+                    <linearGradient id="h" x1="310" y1="710" x2="510" y2="710" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="rgb(255, 158, 158)" offset="0" />
+                        <stop stop-color="rgb(255, 158, 158)" offset="1"/>
+                    </linearGradient>
+                    <linearGradient id="i" x1="110" y1="710" x2="310" y2="710" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="rgb(236,70,70)" offset="0" />
+                        <stop stop-color="rgb(236,70,70)" offset="1"/>
+                    </linearGradient>
+                
+                </defs>
+
+                <path d="M 80 740
+                         L 1140 740
+                         L 1140 70
+                         L 80 70
+                         z"
+                         stroke="black" stroke-width="1" stroke-linejoin="miter" fill="white"/>
+
+                <!-- Legend -->
+                <!--
+                <path d="M 950 200
+                         L 1100 200
+                         L 1100 480
+                         L 950 480
+                         z"
+                         stroke="black" stroke-width="1" stroke-linejoin="miter" fill="white"/>
+
+                <circle cx="980" cy="250" r="16" stroke="black" stroke-width="1" fill="white" />
+                <circle cx="980" cy="290" r="8" stroke="black" stroke-width="1" fill="white" />
+                <circle cx="980" cy="320" r="4" stroke="black" stroke-width="1" fill="white" />
+
+                <line x1="950" y1="340" x2="1100" y2="340" stroke="black" stroke-width="1" />
+
+                <path d="M 965 385
+                         L 995 385
+                         L 995 405
+                         L 965 405
+                         z"
+                         stroke="black" stroke-width="1" stroke-linejoin="miter" fill="rgb(119,210,255)"/>
+                
+                <path d="M 965 425
+                         L 995 425
+                         L 995 445
+                         L 965 445
+                         z"
+                         stroke="black" stroke-width="1" stroke-linejoin="miter" fill="rgb(216,122,239)"/>
+                -->
+                
+                <!-- efg lines -->
+                <line x1="110" y1="710" x2="110" y2="720" stroke="black" stroke-width="1" />
+
+                <line x1="308" y1="710" x2="308" y2="720" stroke="black" stroke-width="1" />
+        
+                <line x1="508" y1="710" x2="508" y2="720" stroke="black" stroke-width="1" />
+
+                <line x1="709" y1="710" x2="709" y2="720" stroke="black" stroke-width="1" />
+
+                <line x1="909" y1="710" x2="909" y2="720" stroke="black" stroke-width="1" />
+
+                <line x1="1110" y1="710" x2="1110" y2="720" stroke="black" stroke-width="1" />
+
+                <!-- mid-point -->
+                <line x1="810" y1="710" x2="810" y2="90" stroke="black" stroke-width="1" stroke-dasharray="8 4" />
+
+                <line x1="110" y1="710" x2="310" y2="710" stroke="rgb(236,70,70)" stroke-width="3" stroke-linecap="square"/>
+                <line x1="310" y1="710" x2="510" y2="710" stroke="rgb(255, 158, 158)" stroke-width="3" stroke-linecap="square"/>
+                <line x1="510" y1="710" x2="710" y2="710" stroke="rgb(255,255,204)" stroke-width="3" stroke-linecap="square"/>
+                <line x1="710" y1="710" x2="910" y2="710" stroke="rgb(164,255,161)" stroke-width="3" stroke-linecap="square"/>
+                <line x1="910" y1="710" x2="1110" y2="710" stroke="rgb(0, 204, 102)" stroke-width="3" stroke-linecap="square"/>
+
+                <!-- Separators -->
+                <line x1="110" y1="650" x2="1110" y2="650" stroke="lightgray" stroke-width="1" />
+                <line x1="110" y1="590" x2="1110" y2="590" stroke="lightgray" stroke-width="1" />
+                <line x1="110" y1="530" x2="1110" y2="530" stroke="lightgray" stroke-width="1" />
+                <line x1="110" y1="470" x2="1110" y2="470" stroke="lightgray" stroke-width="1" />
+                <line x1="110" y1="410" x2="1110" y2="410" stroke="lightgray" stroke-width="1" />
+                <line x1="110" y1="350" x2="1110" y2="350" stroke="lightgray" stroke-width="1" />
+                <line x1="110" y1="290" x2="1110" y2="290" stroke="lightgray" stroke-width="1" />
+                <line x1="110" y1="230" x2="1110" y2="230" stroke="lightgray" stroke-width="1" />
+                <line x1="110" y1="170" x2="1110" y2="170" stroke="lightgray" stroke-width="1" />
+                
+                <!-- Players -->
+
+                <!-- Colors
+                     
+                     Gaurds  rgb(119,210,255)  
+                     F/C     rgb(216,122,239)
+                -->
+                
+                <!-- Kansas -->
+                <!-- T. Enaruna -->
+                <circle cx="110" cy="140" r="4" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- M. Garrett -->
+                <circle cx="495" cy="140" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- S. De Sousa -->
+                <circle cx="610" cy="140" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- I. Moss -->
+                <circle cx="645" cy="140" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255) " />
+
+                <!-- O. Agbaji -->
+                <circle cx="675" cy="140" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- D. Dotson -->
+                <circle cx="695" cy="140" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- D. McCormack -->
+                <circle cx="755" cy="140" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- C. Braun -->
+                <circle cx="880" cy="140" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255) " />
+                
+                <!-- U. Azubuike -->
+                <circle cx="1110" cy="140" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                
+                <!-- Texas Tech -->
+                <!-- C. Clarke -->
+                <circle cx="410" cy="200" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- K. Edwards -->
+                <circle cx="520" cy="200" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- T. Shannon Jr. -->
+                <circle cx="575" cy="200" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- J. Ramsey -->
+                <circle cx="765" cy="200" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- D. Moretti -->
+                <circle cx="780" cy="200" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- K. McCullar -->
+                <circle cx="825" cy="200" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- T. Holyfield -->
+                <circle cx="980" cy="200" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+                
+                <!-- A. Benson -->
+                <circle cx="975" cy="200" r="4" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                
+                <!-- Texas -->
+                <!-- W. Baker -->
+                <circle cx="105" cy="260" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- B. Cunningham -->
+                <circle cx="110" cy="260" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- D. Williams -->
+                <circle cx="235" cy="260" r="4" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- G. Liddell -->
+                <circle cx="285" cy="260" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- C. Ramey -->
+                <circle cx="430" cy="260" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- K. Hepa -->
+                <circle cx="485" cy="260" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- R. Hamm -->
+                <circle cx="525" cy="260" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- A. Jones -->
+                <circle cx="660" cy="260" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- M. Coleman -->
+                <circle cx="675" cy="260" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- J. Febres -->
+                <circle cx="715" cy="260" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- K. Jones -->
+                <circle cx="840" cy="260" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+                
+                <!-- J. Sims -->
+                <circle cx="1110" cy="260" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                
+                <!-- Iowa St -->
+                <!-- C. Grill -->
+                <circle cx="145" cy="320" r="4" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- P. Nixon -->
+                <circle cx="230" cy="320" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- T. Jackson -->
+                <circle cx="420" cy="320" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- R. Bolton-->
+                <circle cx="455" cy="320" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+                
+                <!-- M. Jacobson -->
+                <circle cx="445" cy="320" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- Z. Griffin -->
+                <circle cx="495" cy="320" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239) " />
+
+                <!-- S. Young -->
+                <circle cx="810" cy="320" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239) " />
+
+                <!-- G. Conditt IV -->
+                <circle cx="875" cy="320" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- T. Lewis -->
+                <circle cx="1020" cy="320" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- T. Haliburton -->
+                <circle cx="1110" cy="320" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+
+                <!-- Baylor -->
+                <!-- M. Vital -->
+                <circle cx="435" cy="380" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- D. Mithcell -->
+                <circle cx="485" cy="380" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+                
+                <!-- T. Clark -->
+                <circle cx="485" cy="380" r="4" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+                
+                <!-- D. Bandoo -->
+                <circle cx="505" cy="380" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255) " />
+
+                <!-- F. Thamba -->
+                <circle cx="515" cy="380" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- M. Mayer -->
+                <circle cx="550" cy="380" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- M. Teague-->
+                <circle cx="610" cy="380" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+                
+                <!-- J. Butler -->
+                <circle cx="700" cy="380" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- F. Gillespie -->
+                <circle cx="860" cy="380" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239) " />
+
+
+                <!-- TCU -->
+                <!-- D. Smith -->
+                <circle cx="110" cy="440" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- E. Dennis -->
+                <circle cx="160" cy="440" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- P. Fuller -->
+                <circle cx="205" cy="440" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- R. Nembhard -->
+                <circle cx="265" cy="440" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- J. Ledee -->
+                <circle cx="725" cy="440" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239) " />
+
+                <!-- J. Grayer -->
+                <circle cx="810" cy="440" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- F. Farabello -->
+                <circle cx="825" cy="440" r="4" stroke="black" stroke-width="1" fill="rgb(119,210,255) " />
+
+                <!-- D. Bane -->
+                <circle cx="895" cy="440" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- K. Samuel -->
+                <circle cx="1110" cy="440" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+
+                <!-- Ok -->
+                <!-- J. Bieniemy -->
+                <circle cx="165" cy="500" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- J. Hill -->
+                <circle cx="280" cy="500" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- A. Reaves -->
+                <circle cx="305" cy="500" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- D. Harmon -->
+                <circle cx="345" cy="500" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- K. Doolittle -->
+                <circle cx="510" cy="500" r="16" stroke="black" stroke-width="1" fill="rgb(216,122,239) " />
+                
+                <!-- V. Iwuakor -->
+                <circle cx="510" cy="500" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- A. Williams -->
+                <circle cx="565" cy="500" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- B. Manek -->
+                <circle cx="880" cy="500" r="16" stroke="black" stroke-width="1" fill="rgb(216,122,239) " />
+
+                <!-- K. Kuath -->
+                <circle cx="1110" cy="500" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+
+                <!-- OS -->
+                <!-- C. Harris Jr. -->
+                <circle cx="105" cy="560" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- A. Anderson III -->
+                <circle cx="110" cy="560" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- L. Waters -->
+                <circle cx="350" cy="560" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- I. Likekele -->
+                <circle cx="440" cy="560" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- Ke. Boone -->
+                <circle cx="535" cy="560" r="4" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- Y. Anei -->
+                <circle cx="545" cy="560" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- C. McGriff -->
+                <circle cx="600" cy="560" r="16" stroke="black" stroke-width="1" fill="rgb(216,122,239) " />
+
+                <!-- J. Laurent -->
+                <circle cx="630" cy="560" r="4" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- Ka. Boone -->
+                <circle cx="855" cy="560" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239) " />
+
+                <!-- T. Dziagwa -->
+                <circle cx="1090" cy="560" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+
+                <!-- Kansas St -->
+                <!-- X. Sneed -->
+                <circle cx="315" cy="620" r="16" stroke="black" stroke-width="1" fill="rgb(216,122,239) " />
+
+                <!-- D. Sloan -->
+                <circle cx="375" cy="620" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- A. Gordon -->
+                <circle cx="385" cy="620" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- M. Mawien -->
+                <circle cx="440" cy="620" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- M. Murphy -->
+                <circle cx="485" cy="620" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239) " />
+
+                <!-- C. Diarra -->
+                <circle cx="525" cy="620" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- L. Stockard III -->
+                <circle cx="610" cy="620" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- D. Gordon -->
+                <circle cx="665" cy="620" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+                
+                <!-- M. McGuirl -->
+                <circle cx="785" cy="620" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+
+                <!-- WV -->
+                <!-- G. Osabuohien -->
+                <circle cx="105" cy="680" r="4" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- J. McCabe -->
+                <circle cx="110" cy="680" r="4" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- M. McBride -->
+                <circle cx="355" cy="680" r="16" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- E. Matthews Jr. -->
+                <circle cx="365" cy="680" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239) " />
+
+                <!-- D. Culver -->
+                <circle cx="395" cy="680" r="16" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- C. Harler -->
+                <circle cx="435" cy="680" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- T. Sherman -->
+                <circle cx="480" cy="680" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255) " />
+
+                <!-- S. McNeil -->
+                <circle cx="515" cy="680" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+                
+                <!-- O. Tshiebwe -->
+                <circle cx="870" cy="680" r="8" stroke="black" stroke-width="1" fill="rgb(216,122,239)" />
+
+                <!-- J. Haley -->
+                <circle cx="945" cy="680" r="8" stroke="black" stroke-width="1" fill="rgb(119,210,255)" />
+
+                <!-- Avg -->
+                <rect x="435" y="675" rx="1" ry="1" width="10" height="10" fill="rgb(255,255,0)" stroke="rgb(255,255,0)" stroke-width="2" opacity="0.5" />
+                <rect x="485" y="615" rx="1" ry="1" width="10" height="10" fill="rgb(255,255,0)" stroke="rgb(255,255,0)" stroke-width="2" opacity="0.5" />
+                <rect x="500" y="555" rx="1" ry="1" width="10" height="10" fill="rgb(255,255,0)" stroke="rgb(255,255,0)" stroke-width="2" opacity="0.5" />
+                <rect x="520" y="495" rx="1" ry="1" width="10" height="10" fill="rgb(255,255,0)" stroke="rgb(255,255,0)" stroke-width="2" opacity="0.5" />
+                <rect x="580" y="435" rx="1" ry="1" width="10" height="10" fill="rgb(255,255,0)" stroke="rgb(255,255,0)" stroke-width="2" opacity="0.5" />
+                <rect x="600" y="375" rx="1" ry="1" width="10" height="10" fill="rgb(255,255,0)" stroke="rgb(255,255,0)" stroke-width="2" opacity="0.5" />
+                <rect x="600" y="315" rx="1" ry="1" width="10" height="10" fill="rgb(255,255,0)" stroke="rgb(255,255,0)" stroke-width="2" opacity="0.5" />
+                <rect x="605" y="255" rx="1" ry="1" width="10" height="10" fill="rgb(255,255,0)" stroke="rgb(255,255,0)" stroke-width="2" opacity="0.5" />
+                <rect x="695" y="195" rx="1" ry="1" width="10" height="10" fill="rgb(255,255,0)" stroke="rgb(255,255,0)" stroke-width="2" opacity="0.5" />
+                <rect x="815" y="135" rx="1" ry="1" width="10" height="10" fill="rgb(255,255,0)" stroke="rgb(255,255,0)" stroke-width="2" opacity="0.5" />
+
+               
+            </svg>
+        </div>
+    </body>
+</html>

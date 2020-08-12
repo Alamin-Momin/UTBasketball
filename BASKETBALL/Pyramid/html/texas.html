@@ -1,0 +1,193 @@
+<html>
+    <head>
+        <script type = "text/javascript" src = "https://d3js.org/d3.v4.min.js"></script>
+        <style>
+            .net { font: normal 25px sans-serif; }
+            .od { font: normal 22px sans-serif; }
+            .ff { font: bold 20px sans-serif; }
+        </style>
+        <!--Colors:
+            green - rgb(0, 204, 102)           1-70       1-2 
+            light green - rgb(164,255,161)     71-140     3-4
+            beige - rgb(255,255,204)           141-210    5-6
+            light red -  rgb(255, 158, 158)    211-280    7-8
+            red - rgb(236,70,70)               281-353    9-10
+        -->
+    </head>
+    <body>
+        <div id="svgcontainer">
+            <svg viewBox="0 0 1100 1100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 510 200
+                         L 1010 700
+                         L 10 700
+                         z"
+                         stroke="black" stroke-width="6" stroke-linejoin="miter"/>
+                <!-- net rtg -->
+                <polyline points="344 366
+                                  510 200
+                                  676 366"
+                          id = "net_rtg" stroke="white" stroke-width="2" stroke-linecap="square" fill="      rgb(236,70,70)   "/>
+                <!-- OER -->
+                <polyline points="344 366
+                                  510 366
+                                  510 534
+                                  176 534
+                                  344 366"
+                          id = "OER" stroke="white" stroke-width="2" fill=" rgb(236,70,70)    "/>
+                <!-- DER -->
+                <path d="M 510 366
+                         L 676 366
+                         L 844 534
+                         L 510 534
+                         L 510 366"
+                         id = "DER" stroke="white" stroke-width="2" fill="  rgb(255, 158, 158)   "/>
+                <!-- O_efg -->
+                <path d="M 176 534
+                         L 10 700
+                         L 210 700
+                         L 210 534
+                         L 176 534"
+                         id = "O_efg" stroke="white" stroke-width="2" fill="  rgb(236,70,70)    "/>
+                <!-- O_to -->
+                <path d="M 210 534
+                         L 210 700
+                         L 310 700
+                         L 310 534
+                         L 210 534"
+                         id = "O_to" stroke="white" stroke-width="2" fill=" rgb(236,70,70) "/>
+                <!-- O_or -->
+                <path d="M 310 534
+                         L 310 700
+                         L 410 700
+                         L 410 534
+                         L 310 534"
+                         id = "O_or" stroke="white" stroke-width="2" fill="  rgb(255,255,204) "/>
+                <!-- O_Ftr -->
+                <path d="M 410 534
+                         L 410 700
+                         L 510 700
+                         L 510 534
+                         L 410 534"
+                         id = "O_Ftr" stroke="white" stroke-width="2" fill="  rgb(164,255,161)    "/>
+                <!-- D_efg -->
+                <path d="M 844 534
+                         L 1010 700
+                         L 810 700
+                         L 810 534
+                         L 844 534"
+                         id = "D_efg" stroke="white" stroke-width="2" fill="  rgb(236,70,70)    "/>
+                <!-- D_to -->
+                <path d="M 810 534
+                         L 810 700
+                         L 710 700
+                         L 710 534
+                         L 810 534"
+                         id = "D_to" stroke="white" stroke-width="2" fill="   rgb(0, 204, 102)     "/>
+                <!-- D_dr -->
+                <path d="M 710 534
+                         L 710 700
+                         L 610 700
+                         L 610 534
+                         L 710 534"
+                         id = "D_dr" stroke="white" stroke-width="2" fill="    rgb(255, 158, 158)   "/>
+                <!-- D_Ftr -->
+                <path d="M 610 534
+                         L 610 700
+                         L 510 700
+                         L 510 534
+                         L 610 534"
+                         id = "D_Ftr" stroke="white" stroke-width="2" fill=" rgb(236,70,70)  "/>
+            
+            </svg>
+            
+        </div>
+    </body>
+
+
+    <script>
+        function fillColor(rank) {
+            if (rank <=70) {
+                return "rgb(0, 204, 102)"
+            }
+            else if (rank <=140) {
+                return "rgb(164,255,161)"
+            }
+            else if (rank <=210) {
+                return "rgb(255,255,204)"
+            }
+            else if (rank <=280) {
+                return "rgb(255, 158, 158)"
+            }
+            else {
+                return "rgb(236,70,70)"
+            }
+        }
+
+        /*
+        //net_rtg
+        var net_rtg = document.getElementById("net_rtg")
+        var fill = fillColor()
+        net_rtg.setAttribute("fill", fill)
+
+
+        //OER
+        var OER = document.getElementById("OER")
+        var fill = fillColor()
+        OER.setAttribute("fill", fill)
+
+
+        //DER
+        var DER = document.getElementById("DER")
+        var fill = fillColor()
+        DER.setAttribute("fill", fill)
+
+
+        //O_efg
+        var O_efg = document.getElementById("O_efg")
+        var fill = fillColor()
+        O_efg.setAttribute("fill", fill)
+
+
+        //O_to
+        var O_to = document.getElementById("O_to")
+        var fill = fillColor()
+        O_to.setAttribute("fill", fill)
+
+
+        //O_or
+        var O_or = document.getElementById("O_or")
+        var fill = fillColor()
+        O_or.setAttribute("fill", fill)
+        
+
+        //O_Ftr
+        var O_Ftr = document.getElementById("O_Ftr")
+        var fill = fillColor()
+        O_Ftr.setAttribute("fill", fill)
+
+
+        //D_efg
+        var D_efg = document.getElementById("D_efg")
+        var fill = fillColor()
+        D_efg.setAttribute("fill", fill)
+
+
+        //D_to
+        var D_to = document.getElementById("D_to")
+        var fill = fillColor()
+        D_to.setAttribute("fill", fill)
+
+
+        //D_dr
+        var D_or = document.getElementById("D_dr")
+        var fill = fillColor()
+        D_dr.setAttribute("fill", fill)
+
+
+        //D_Ftr
+        var D_Ftr = document.getElementById("D_Ftr")
+        var fill = fillColor()
+        D_Ftr.setAttribute("fill", fill)
+
+    </script>
+</html>
